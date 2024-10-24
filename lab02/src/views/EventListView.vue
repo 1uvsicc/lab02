@@ -7,15 +7,20 @@ import { ref, onMounted } from 'vue'
 import EventService from '@/services/EventService'
 
 const events = ref<Event[]>(null)
-  onMounted(() => {
-    EventService.getEvents()
+
+onMounted(() => {
+  EventService.getEvents()
+  
      .then((response) => {
        events.value = response.data
-    })
+     })
+
+    
     .catch((error) => {
       console.error('There was an error!', error)
     })
 })
+
 
 </script>
  
@@ -53,10 +58,10 @@ const events = ref<Event[]>(null)
 .event-container {
   display: flex;
   flex-direction: column;
-  align-items: center; /* 确保子元素在主轴上居中 */
-  width: 80%; /* 或者一个固定宽度，根据设计需求 */
+  align-items: center; 
+  width: 80%; 
   padding: 10px;
-  margin: 10px auto; /* 上下边距固定，左右自动，确保水平居中 */
+  margin: 10px auto;
 }
 .category, .organizer {
   font-size: 16px; 
