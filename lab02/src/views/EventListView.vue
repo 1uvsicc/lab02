@@ -25,12 +25,12 @@ const events = ref<Event[]>(null)
    <h1>Events For Good</h1>
    <!-- new element -->
  
-
-<div v-for="event in events" :key="event.id" class="event-container">
+   <div v-for="event in events" :key="event.id" class="event-container">
       <EventCard :event="event" />
       
       <EventInfo :event="event" />
    </div>
+
   
 </template>
 
@@ -39,17 +39,28 @@ const events = ref<Event[]>(null)
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-.event-info {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  width: 100%;
-  padding: 10px;
+  justify-content: center;
+  margin: auto;
 }
 
+.event-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+    width: 100%;
+    padding: 10px;
+}
+.event-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 确保子元素在主轴上居中 */
+  width: 80%; /* 或者一个固定宽度，根据设计需求 */
+  padding: 10px;
+  margin: 10px auto; /* 上下边距固定，左右自动，确保水平居中 */
+}
 .category, .organizer {
   font-size: 16px; 
   margin-left: 8px; 
+  text-align: center;
 }
 </style>
