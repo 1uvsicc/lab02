@@ -3,13 +3,13 @@
 import { ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { RouterLink, RouterView } from 'vue-router'
+import { useMessageStore } from '@/stores/message'
+import { storeToRefs } from 'pinia'
 const pageSize = ref<number | string>(2);   
-
-
 const route = useRoute();
 const router = useRouter();
-
-
+const store = useMessageStore()
+const { message } = storeToRefs(store)
 const updateRoute = (newSize: number) => {
   
   router.push({
@@ -22,6 +22,10 @@ const updateRoute = (newSize: number) => {
 <template>
   <div id="layout">
     <header>
+      <div id="flashMessage" v-if="message">
+   <h4>{{ message }}</h4>
+ </div>
+
       <div class="wrapper">
         <nav>
           <RouterLink v-bind:to="{ name: 'event-list-view' }">Event</RouterLink> |
@@ -30,7 +34,7 @@ const updateRoute = (newSize: number) => {
           <div class="page-size-selector">
             <label for="pageSize">Events per page:</label>
             <select id="pageSize" v-model="pageSize" @change="updateRoute(parseInt(pageSize))">
-              <option value="2">default</option>
+              <option value="3">default</option>
               <option value="3">3</option>
               <option value="4">4</option>
               <option value="5">5</option>
@@ -69,5 +73,17 @@ nav a.router-link-exact-active {
   + h2 {
     font-size: 20px;
   }
+ @keyframes yellofade {
+  from {
+    background-color: yellow;
+  }
+  to {
+    background-color: transparent;
+  }
+}
+#flashMessage {
+  animation: yellofade 3s ease-in-out;
+}
+
 }
 </style>

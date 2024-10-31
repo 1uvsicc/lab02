@@ -5,12 +5,12 @@ import type { Event } from '@/types'
 
 import { ref, onMounted, computed, watchEffect } from 'vue'
 import EventService from '@/services/EventService'
-
+//import nProgress from 'nprogress'
 const events = ref<Event[] | null>(null)
 const totalEvents = ref(0)
 const hasNexPage = computed(() => {
 
-const totalPages = Math.ceil(totalEvents.value / 2)
+const totalPages = Math.ceil(totalEvents.value / 3)
 return page.value < totalPages
 })
 
@@ -32,7 +32,8 @@ const size = computed(()=>props.size)
 onMounted(() => {
   watchEffect(() => {
    
-    events.value = null
+    //events.value = null
+    //nProgress.start()
     EventService.getEvents(size.value, page.value)
       .then((response) => {
         events.value = response.data
@@ -41,6 +42,10 @@ onMounted(() => {
       .catch((error) => {
         console.error('There was an error!', error)
       })
+      //.finally(() => {
+    //nProgress.done()
+  //})
+
   })
 
 })
