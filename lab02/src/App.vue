@@ -4,6 +4,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { RouterLink, RouterView } from 'vue-router'
 import { useMessageStore } from '@/stores/message'
 import { storeToRefs } from 'pinia'
+import { SpeedInsights } from '@vercel/speed-insights/next';
 const pageSize = ref<number | string>(2)
 const route = useRoute()
 const router = useRouter()
@@ -16,7 +17,7 @@ const updateRoute = (newSize: number) => {
   })
 }
 </script>
-1
+
 <template>
   <SpeedInsights />
   <div class="text-center font-sans text-gray-700 antialias">
