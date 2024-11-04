@@ -9,78 +9,84 @@ import EventService from '@/services/EventService'
 const events = ref<Event[] | null>(null)
 const totalEvents = ref(0)
 const hasNexPage = computed(() => {
-
-const totalPages = Math.ceil(totalEvents.value / 3)
-return page.value < totalPages
+  const totalPages = Math.ceil(totalEvents.value / 3)
+  return page.value < totalPages
 })
 
-  const props = defineProps({
+const props = defineProps({
   page: {
     type: Number,
-    required: true
-
+    required: true,
   },
   size: {
     type: Number,
     required: true,
-    default: 2 
-  }
+    default: 2,
+  },
 })
 const page = computed(() => props.page)
-const size = computed(()=>props.size)
+const size = computed(() => props.size)
 
 onMounted(() => {
   watchEffect(() => {
-   
     //events.value = null
     //nProgress.start()
     EventService.getEvents(size.value, page.value)
-      .then((response) => {
+      .then(response => {
         events.value = response.data
         totalEvents.value = response.headers['x-total-count']
       })
-      .catch((error) => {
+      .catch(error => {
         console.error('There was an error!', error)
       })
-      //.finally(() => {
+    //.finally(() => {
     //nProgress.done()
-  //})
-
+    //})
   })
-
 })
 </script>
 
 <template>
- <h1>Events For Good</h1>
+  <h1>Events For Good</h1>
   <div class="flex flex-col items-center">
-    <div v-for="event in events" :key="event.id" class="event-container flex flex-col items-center w-4/5 py-4 px-2 my-4 mx-auto">
+    <div
+      v-for="event in events"
+      :key="event.id"
+      class="event-container flex flex-col items-center w-4/5 py-4 px-2 my-4 mx-auto"
+    >
       <EventCard :event="event" />
       <EventInfo :event="event" />
     </div>
     <div class="pagination flex w-58 justify-between">
       <RouterLink
         id="page-prev"
-        :to="{ name: 'event-list-view', query: { page: page - 1, size: props.size } }"
+        :to="{
+          name: 'event-list-view',
+          query: { page: page - 1, size: props.size },
+        }"
         rel="prev"
         v-if="page != 1"
         class="text-left"
-      >&#60; Prev Page</RouterLink>
+        >&#60; Prev Page</RouterLink
+      >
 
       <RouterLink
         id="page-next"
-        :to="{ name: 'event-list-view', query: { page: page + 1, size: props.size } }"
+        :to="{
+          name: 'event-list-view',
+          query: { page: page + 1, size: props.size },
+        }"
         rel="next"
         v-if="hasNexPage"
         class="text-right"
-      >Next Page &#62;</RouterLink>
+        >Next Page &#62;</RouterLink
+      >
     </div>
   </div>
 </template>
 
 <style scoped>
-
- /*
+/*
  .event-info {
   display: flex;
   justify-content: center;

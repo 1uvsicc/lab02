@@ -1,5 +1,5 @@
 <template>
-   <div class="students-view flex flex-wrap items-center justify-center">
+  <div class="students-view flex flex-wrap items-center justify-center">
     <StudentCard
       v-for="student in students"
       :key="student"

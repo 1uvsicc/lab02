@@ -18,8 +18,13 @@ defineProps<{
 </script>
 
 <template>
-   <RouterLink class="event-link text-indigo-600 hover:underline" :to="{ name: 'event-detail-view', params: { id: event.id } }">
-    <div class="cursor-pointer border border-gray-600 p-[20px] w-[250px] mb-[18px] hover:scale-102% hover:shadow">
+  <RouterLink
+    class="event-link text-indigo-600 hover:underline"
+    :to="{ name: 'event-detail-view', params: { id: event.id } }"
+  >
+    <div
+      class="cursor-pointer border border-gray-600 p-[20px] w-[250px] mb-[18px] hover:scale-102% hover:shadow"
+    >
       <h2 class="text-xl">{{ event.title }}</h2>
       <span class="text-gray-500">@{{ event.time }} on {{ event.date }}</span>
     </div>

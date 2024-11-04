@@ -1,40 +1,59 @@
 <script setup lang="ts">
-
-import { ref } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { ref } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import { RouterLink, RouterView } from 'vue-router'
 import { useMessageStore } from '@/stores/message'
 import { storeToRefs } from 'pinia'
-const pageSize = ref<number | string>(2);   
-const route = useRoute();
-const router = useRouter();
+const pageSize = ref<number | string>(2)
+const route = useRoute()
+const router = useRouter()
 const store = useMessageStore()
 const { message } = storeToRefs(store)
 const updateRoute = (newSize: number) => {
-  
   router.push({
     name: route.name,
     query: { ...route.query, size: newSize },
-  });
-};
+  })
+}
 </script>
 
 <template>
   <div class="text-center font-sans text-gray-700 antialias">
     <header>
       <div id="flashMessage" class="animate-fade" v-if="message">
-   <h4>{{ message }}</h4>
- </div>
- <h1>Deploy with Vercel</h1>
+        <h4>{{ message }}</h4>
+      </div>
+      <h1>Deploy with Vercel</h1>
       <div class="wrapper">
         <nav class="py-6">
-   <RouterLink class="font-bold text-gray-700" exact-active-class="text-green-500" :to="{ name: 'event-list-view' }">Event</RouterLink> |
-   <RouterLink class="font-bold text-gray-700" exact-active-class="text-green-500" :to="{ name: 'about' }">About</RouterLink>|
-   <RouterLink class="font-bold text-gray-700" exact-active-class="text-green-500" :to="{ name: 'students' }">Student</RouterLink>
-          
+          <RouterLink
+            class="font-bold text-gray-700"
+            exact-active-class="text-green-500"
+            :to="{ name: 'event-list-view' }"
+            >Event</RouterLink
+          >
+          |
+          <RouterLink
+            class="font-bold text-gray-700"
+            exact-active-class="text-green-500"
+            :to="{ name: 'about' }"
+            >About</RouterLink
+          >|
+          <RouterLink
+            class="font-bold text-gray-700"
+            exact-active-class="text-green-500"
+            :to="{ name: 'students' }"
+            >Student</RouterLink
+          >
+
           <div class="page-size-selector">
             <label for="pageSize" class="block">Events per page:</label>
-            <select id="pageSize" v-model="pageSize" @change="updateRoute(parseInt(pageSize))" class="border border-gray-300 p-2">
+            <select
+              id="pageSize"
+              v-model="pageSize"
+              @change="updateRoute(parseInt(pageSize))"
+              class="border border-gray-300 p-2"
+            >
               <option value="3">default</option>
               <option value="3">3</option>
               <option value="4">4</option>

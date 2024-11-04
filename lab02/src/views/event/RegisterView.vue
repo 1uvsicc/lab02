@@ -5,22 +5,21 @@ import { useMessageStore } from '@/stores/message'
 import { useRouter } from 'vue-router'
 const props = defineProps<{
   event: Event
-  id: String
+  id: string
 }>()
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 
 const { event } = toRefs(props)
 const router = useRouter()
 const store = useMessageStore()
 const register = () => {
-store.updateMessage('You are successuflly registered for ' + props.event.title)
- setTimeout(() => {
-   store.resetMessage()
- }, 3000)
- router.push({ name: 'event-detail-view', params: { id: props.event.id } })
-
+  store.updateMessage(
+    'You are successuflly registered for ' + props.event.title,
+  )
+  setTimeout(() => {
+    store.resetMessage()
+  }, 3000)
+  router.push({ name: 'event-detail-view', params: { id: props.event.id } })
 }
-
 </script>
 <template>
   <p>Register event here</p>
