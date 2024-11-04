@@ -52,47 +52,36 @@ onMounted(() => {
 </script>
 
 <template>
-  <h1>Events For Good</h1>
-  <!-- new element -->
+ <h1>Events For Good</h1>
+  <div class="flex flex-col items-center">
+    <div v-for="event in events" :key="event.id" class="event-container flex flex-col items-center w-4/5 py-4 px-2 my-4 mx-auto">
+      <EventCard :event="event" />
+      <EventInfo :event="event" />
+    </div>
+    <div class="pagination flex w-58 justify-between">
+      <RouterLink
+        id="page-prev"
+        :to="{ name: 'event-list-view', query: { page: page - 1, size: props.size } }"
+        rel="prev"
+        v-if="page != 1"
+        class="text-left"
+      >&#60; Prev Page</RouterLink>
 
-  <div v-for="event in events" :key="event.id" class="event-container">
-    
-    <EventCard :event="event" />
-    <EventInfo :event="event" />
-  
-  <div class="pagination">
-     <RouterLink
-       id="page-prev"
-       :to="{ name: 'event-list-view', query: { page: page - 1 ,size: props.size} }"
-       rel="prev"
-       v-if="page != 1"
-       >&#60; Prev Page</RouterLink
-     >
-
-     <RouterLink
-       id="page-next"
-       :to="{ name: 'event-list-view', query: { page: page + 1,size: props.size } }"
-       rel="next"
-       v-if="hasNexPage"
-       >Next Page &#62;</RouterLink
-     >
-     
-  </div>     
- </div>
-
-
+      <RouterLink
+        id="page-next"
+        :to="{ name: 'event-list-view', query: { page: page + 1, size: props.size } }"
+        rel="next"
+        v-if="hasNexPage"
+        class="text-right"
+      >Next Page &#62;</RouterLink>
+    </div>
+  </div>
 </template>
 
 <style scoped>
-.events {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: auto;
-}
 
-.event-info {
+ /*
+ .event-info {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -131,5 +120,5 @@ onMounted(() => {
 #page-next {
   text-align: right;
 }
-
+  */
 </style>

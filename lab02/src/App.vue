@@ -20,20 +20,21 @@ const updateRoute = (newSize: number) => {
 </script>
 
 <template>
-  <div id="layout">
+  <div class="text-center font-sans text-gray-700 antialias">
     <header>
-      <div id="flashMessage" v-if="message">
+      <div id="flashMessage" class="animate-fade" v-if="message">
    <h4>{{ message }}</h4>
  </div>
-
+ <h1>Deploy with Vercel</h1>
       <div class="wrapper">
-        <nav>
-          <RouterLink v-bind:to="{ name: 'event-list-view' }">Event</RouterLink> |
-          <RouterLink v-bind:to="{ name: 'about' }">About</RouterLink> |
-          <RouterLink v-bind:to="{ name: 'students' }">Student</RouterLink>
+        <nav class="py-6">
+   <RouterLink class="font-bold text-gray-700" exact-active-class="text-green-500" :to="{ name: 'event-list-view' }">Event</RouterLink> |
+   <RouterLink class="font-bold text-gray-700" exact-active-class="text-green-500" :to="{ name: 'about' }">About</RouterLink>|
+   <RouterLink class="font-bold text-gray-700" exact-active-class="text-green-500" :to="{ name: 'students' }">Student</RouterLink>
+          
           <div class="page-size-selector">
-            <label for="pageSize">Events per page:</label>
-            <select id="pageSize" v-model="pageSize" @change="updateRoute(parseInt(pageSize))">
+            <label for="pageSize" class="block">Events per page:</label>
+            <select id="pageSize" v-model="pageSize" @change="updateRoute(parseInt(pageSize))" class="border border-gray-300 p-2">
               <option value="3">default</option>
               <option value="3">3</option>
               <option value="4">4</option>
@@ -49,16 +50,15 @@ const updateRoute = (newSize: number) => {
 </template>
 
 <style>
-#layout {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-
-  color: #2c3e50;
+@keyframes yellofade {
+  from {
+    background-color: yellow;
+  }
+  to {
+    background-color: transparent;
+  }
 }
-
-nav {
+/*  nav {
   padding: 30px;
 }
 
@@ -73,17 +73,12 @@ nav a.router-link-exact-active {
   + h2 {
     font-size: 20px;
   }
- @keyframes yellofade {
-  from {
-    background-color: yellow;
-  }
-  to {
-    background-color: transparent;
-  }
-}
+ 
 #flashMessage {
   animation: yellofade 3s ease-in-out;
 }
 
 }
+
+*/
 </style>

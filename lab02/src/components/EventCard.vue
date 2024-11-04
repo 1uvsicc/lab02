@@ -18,15 +18,15 @@ defineProps<{
 </script>
 
 <template>
-  <RouterLink class="event-link" :to="{ name: 'event-detail-view', params: { id: event.id } }">
-    <div class="event-card">
-      <h2>{{ event.title }}</h2>
-      <span>@{{ event.time }} on {{ event.date }}</span>
+   <RouterLink class="event-link text-indigo-600 hover:underline" :to="{ name: 'event-detail-view', params: { id: event.id } }">
+    <div class="cursor-pointer border border-gray-600 p-[20px] w-[250px] mb-[18px] hover:scale-102% hover:shadow">
+      <h2 class="text-xl">{{ event.title }}</h2>
+      <span class="text-gray-500">@{{ event.time }} on {{ event.date }}</span>
     </div>
   </RouterLink>
 </template>
 <style scoped>
-.event-card {
+/*  .event-card {
   padding: 20px;
   width: 250px;
   cursor: pointer;
@@ -41,5 +41,5 @@ defineProps<{
   text-decoration: none;
   color: #2c3e50;
 }
-
+*/
 </style>

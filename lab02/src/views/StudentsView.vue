@@ -1,5 +1,5 @@
 <template>
-  <div class="students-view">
+   <div class="students-view flex flex-wrap items-center justify-center">
     <StudentCard
       v-for="student in students"
       :key="student"
@@ -27,9 +27,9 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.students-view {
+/* .students-view {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-}
+} */
 </style>

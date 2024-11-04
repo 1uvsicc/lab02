@@ -1,7 +1,7 @@
 <template>
-  <div class="event-info">
-    <div class="category">{{ event.category }}</div>
-    <div class="organizer">{{ event.organizer }}</div>
+  <div class="flex items-center justify-center w-full p-4">
+    <div class="text-right mr-4 text-base">{{ event.category }}</div>
+    <div class="text-right text-base">{{ event.organizer }}</div>
   </div>
 </template>
 
@@ -15,7 +15,7 @@ defineProps<{
 </script>
 
 <style scoped>
-.event-info {
+/*  .event-info {
   display: flex;
   text-align: center;
   width: 100%;
@@ -25,11 +25,11 @@ defineProps<{
 .category,
 .organizer {
   font-size: 16px;
-  display: inline-block; /* 使元素在行内显示 */
+  display: inline-block; 
   text-align: right;
-  margin-left: 10px; /* 在元素之间添加一些空间 */
+  margin-left: 10px;
 }
 .organizer {
   margin-right: 0;
-}
+}*/
 </style>
