@@ -8,11 +8,10 @@
         "use": "@vercel/node",
        
         "config": {
-          "buildCommand": "npm run build",
-          "outputDirectory": "dist"
+          "distDir":  "dist"
         }
         
       }
     ],
-    "routes": [ { "src": "/(.*)", "dest": "/index.html" }]
+    "rewrites": [{"source": "/(.*)", "destination": "/"}]  
   }
