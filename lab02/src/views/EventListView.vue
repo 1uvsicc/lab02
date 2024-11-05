@@ -1,76 +1,19 @@
-<script setup lang="ts">
-import EventCard from '@/components/EventCard.vue'
-import EventInfo from '@/EventInfo.vue'
-import type { Event } from '@/types'
-import { useRoute, useRouter } from 'vue-router'
-import { ref, onMounted, computed, watchEffect } from 'vue'
-import EventService from '@/services/EventService'
-//import nProgress from 'nprogress'
-const pageSize = ref<number | string>(2)
-const route = useRoute()
-const router = useRouter()
-const updateRoute = (newSize: number) => {
-  router.push({
-    name: route.name,
-    query: { ...route.query, size: newSize },
-  })
-}
-const events = ref<Event[] | null>(null)
-const totalEvents = ref(0)
-const hasNexPage = computed(() => {
-  const totalPages = Math.ceil(totalEvents.value / 3)
-  return page.value < totalPages
-})
-
-const props = defineProps({
-  page: {
-    type: Number,
-    required: true,
-  },
-  size: {
-    type: Number,
-    required: true,
-    default: 2,
-  },
-})
-const page = computed(() => props.page)
-const size = computed(() => props.size)
-
-onMounted(() => {
-  watchEffect(() => {
-    //events.value = null
-    //nProgress.start()
-    EventService.getEvents(size.value, page.value)
-      .then(response => {
-        events.value = response.data
-        totalEvents.value = response.headers['x-total-count']
-      })
-      .catch(error => {
-        console.error('There was an error!', error)
-      })
-    //.finally(() => {
-    //nProgress.done()
-    //})
-  })
-})
-</script>
-
 <template>
   <h1>Events For Good</h1>
   <div class="page-size-selector">
-            <label for="pageSize" class="block">Events per page:</label>
-            <select
-              id="pageSize"
-              v-model="pageSize"
-              @change="updateRoute(parseInt(pageSize))"
-              class="border border-gray-300 p-2"
-            >
-              <option value="3">default</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-          </div>
+    <label for="pageSize" class="block">Events per page:</label>
+    <select
+      id="pageSize"
+      v-model="pageSize"
+      @change="updateRoute(Number(pageSize))" 
+      class="border border-gray-300 p-2"
+    >
+      <option value="3">default</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+    </select>
+  </div>
   <div class="flex flex-col items-center">
     <div
       v-for="event in events"
@@ -107,6 +50,59 @@ onMounted(() => {
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import EventCard from '@/components/EventCard.vue'
+import EventInfo from '@/EventInfo.vue'
+import type { Event } from '@/types'
+import { useRoute, useRouter } from 'vue-router'
+import { ref, onMounted, computed, watchEffect } from 'vue'
+import EventService from '@/services/EventService'
+
+const pageSize = ref<number | string>(2)
+const route = useRoute()
+const router = useRouter()
+const updateRoute = (newSize: number) => {
+  router.push({
+    name: route.name,
+    query: { ...route.query, size: newSize },
+  })
+}
+const events = ref<Event[] | null>(null)
+const totalEvents = ref(0)
+const hasNexPage = computed(() => {
+  const totalPages = Math.ceil(totalEvents.value / 3)
+  return page.value < totalPages
+})
+
+const props = defineProps({
+  page: {
+    type: Number,
+    required: true,
+  },
+  size: {
+    type: Number,
+    required: true,
+    default: 2,
+  },
+})
+const page = computed(() => props.page)
+const size = computed(() => props.size)
+
+onMounted(() => {
+  watchEffect(() => {
+    EventService.getEvents(size.value, page.value)
+      .then(response => {
+        events.value = response.data
+        totalEvents.value = response.headers['x-total-count']
+      })
+      .catch(error => {
+        console.error('There was an error!', error)
+      })
+  })
+})
+</script>
+
 
 <style scoped>
 /*
