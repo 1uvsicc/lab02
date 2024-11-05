@@ -1,25 +1,17 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+
 import { RouterLink, RouterView } from 'vue-router'
 import { useMessageStore } from '@/stores/message'
 import { storeToRefs } from 'pinia'
 import { SpeedInsights } from '@vercel/speed-insights/next';
-const pageSize = ref<number | string>(2)
-const route = useRoute()
-const router = useRouter()
+
 const store = useMessageStore()
 const { message } = storeToRefs(store)
-const updateRoute = (newSize: number) => {
-  router.push({
-    name: route.name,
-    query: { ...route.query, size: newSize },
-  })
-}
+
 </script>
 
 <template>
-  <SpeedInsights />
+ <!-- <SpeedInsights />-->
   <div class="text-center font-sans text-gray-700 antialias">
     <header>
       <div id="flashMessage" class="animate-fade" v-if="message">
@@ -48,20 +40,7 @@ const updateRoute = (newSize: number) => {
             >Student</RouterLink
           >
 
-          <div class="page-size-selector">
-            <label for="pageSize" class="block">Events per page:</label>
-            <select
-              id="pageSize"
-              v-model="pageSize"
-              @change="updateRoute(parseInt(pageSize))"
-              class="border border-gray-300 p-2"
-            >
-              <option value="3">default</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-          </div>
+          
         </nav>
       </div>
     </header>

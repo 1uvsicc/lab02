@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { toRefs } from 'vue'
 import { type Event } from '@/types'
-import { useMessageStore } from '@/stores/message'
+import { useMessageStore } from '@/stores/message1'
 import { useRouter } from 'vue-router'
 const props = defineProps<{
   event: Event
